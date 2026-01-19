@@ -4,7 +4,7 @@
     <link rel="icon" type="image/x-icon" href="icon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BeepSmol (Music)</title>
+    <title>BeepSmol (music)</title> 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -55,173 +55,63 @@
             100% { transform: scale(1); }
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.6);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 20;
+            color: white;
+            text-decoration: none;
+        }
+
+        .song-card:hover .fullscreen-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-container {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1000px; background-color: #fffcf5;
+            padding: 12px 30px; border-radius: 50px; display: flex;
+            justify-content: space-between; align-items: center;
+            box-shadow: 0 8px 30px rgba(93, 74, 68, 0.15); z-index: 9999;
+        }
+        .logo { font-size: 1.3rem; font-weight: 700; color: #d97757; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-icon { width: 24px; height: 24px; object-fit: contain; }
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #5d4a44; font-weight: 600; padding: 8px 15px; border-radius: 20px; }
+        @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
 </head>
 <body class="p-6 md:p-12">
-  <style>
-  :root {
-    --cozy-bg: #fffcf5;       /* Warm cream */
-    --cozy-text: #5d4a44;     /* Soft brown */
-    --cozy-accent: #d97757;   /* Muted terracotta */
-    --cozy-shadow: 0 8px 30px rgba(93, 74, 68, 0.15);
-    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
+    <nav class="nav-container">
+      <a href="https://beepsmol.com" class="logo">
+        <img src="icon.ico" alt="Logo" class="logo-icon"> BeepSmol
+      </a>
+      <ul class="nav-links">
+        <li><a href="https://beepsmol.com">Home</a></li>
+        <li><a href="https://beepsmol.com/games">Games</a></li>
+        <li><a href="https://beepsmol.com/music">Music</a></li>
+        <li><a href="https://beepsmol.com/links">Links</a></li>
+      </ul>
+    </nav>
 
-  .nav-container {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 1000px;
-    background-color: var(--cozy-bg);
-    padding: 12px 30px;
-    border-radius: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: var(--cozy-shadow);
-    z-index: 9999;
-    font-family: 'Quicksand', 'Segoe UI', sans-serif;
-    transition: var(--transition);
-  }
-
-  .nav-container.shrunk {
-    top: 10px;
-    padding: 8px 25px;
-    width: 85%;
-    background-color: #ffffff;
-  }
-
-  .logo {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--cozy-accent);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  /* Specific styling for your .ico file */
-  .logo-icon {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    border-radius: 4px; /* Optional: adds a tiny roundness to the icon */
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    color: var(--cozy-text);
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 8px 15px;
-    border-radius: 20px;
-    transition: var(--transition);
-  }
-
-  .nav-links a:hover {
-    background-color: #f3ece4;
-    color: var(--cozy-accent);
-    transform: translateY(-2px);
-  }
-
-  .cozy-burger {
-    display: none;
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 5px;
-  }
-
-  .cozy-burger div {
-    width: 22px;
-    height: 3px;
-    background: var(--cozy-text);
-    margin: 4px;
-    border-radius: 3px;
-    transition: 0.3s;
-  }
-
-  @media (max-width: 768px) {
-    .cozy-burger { display: block; }
-    .nav-links {
-      position: absolute;
-      top: 70px;
-      right: 0;
-      background: var(--cozy-bg);
-      flex-direction: column;
-      width: 200px;
-      padding: 20px;
-      border-radius: 25px;
-      box-shadow: var(--cozy-shadow);
-      transform: scale(0);
-      transform-origin: top right;
-      transition: var(--transition);
-    }
-    .nav-links.active {
-      transform: scale(1);
-    }
-  }
-</style>
-
-<nav class="nav-container" id="main-nav">
-  <a href="https://beepsmol.com" class="logo">
-    <img src="icon.ico" alt="Logo" class="logo-icon"> 
-    BeepSmol
-  </a>
-  
-  <ul class="nav-links" id="nav-list">
-    <li><a href="https://beepsmol.com">Home</a></li>
-    <li><a href="https://beepsmol.com/games">Games</a></li>
-    <li><a href="https://beepsmol.com/music">Music</a></li>
-    <li><a href="https://beepsmol.com/links">Links</a></li>
-  </ul>
-
-  <button class="cozy-burger" id="menu-btn">
-    <div></div>
-    <div></div>
-    <div></div>
-  </button>
-</nav>
-
-<script>
-  const nav = document.getElementById('main-nav');
-  const btn = document.getElementById('menu-btn');
-  const list = document.getElementById('nav-list');
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      nav.classList.add('shrunk');
-    } else {
-      nav.classList.remove('shrunk');
-    }
-  });
-
-  btn.addEventListener('click', () => {
-    list.classList.toggle('active');
-  });
-
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => list.classList.remove('active'));
-  });
-</script>
-
-    <main class="max-w-6xl mx-auto">
-        <div class="mb-12 mt-8">
+    <main class="max-w-6xl mx-auto pt-24">
+        <div class="mb-12">
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">My Music</h1>
             <p class="text-slate-400 text-lg">All the songs and beats I've made public.</p>
         </div>
@@ -233,9 +123,8 @@
 
     <script>
         /**
-         * EASY EDIT SECTION
-         * audio: filename of the mp3 in the same folder
-         * image: filename of the cover art in the same folder
+         * EASY ADD: Just add a new object to this array to add a new song panel.
+         * The 'playerUrl' should point to the HTML file for that song's large player.
          */
         const SONGS_DATA = [
             {
@@ -243,25 +132,27 @@
                 artist: "BeepSmol",
                 audio: "smallagain.mp3", 
                 image: "smallagain.png",
-                genre: "Lo-Fi"
+                genre: "Lo-Fi",
+                playerUrl: "https://beepsmol.com/music/smallagain.html"
             },
-            {
-                title: "Coming Soon",
-                artist: "BeepSmol",
-                audio: "song.mp3",
-                image: "placeholder.png",
-                genre: "N/A"
+            { 
+                title: "Coming Soon", 
+                artist: "BeepSmol", 
+                audio: "song.mp3", 
+                image: "placeholder.png", 
+                genre: "N/A",
+                playerUrl: "https://beepsmol.com/music" 
             },
-            {
-                title: "Coming Soon",
-                artist: "BeepSmol",
-                audio: "song.mp3",
-                image: "placeholder.png",
-                genre: "N/A"
+            { 
+                title: "Coming Soon", 
+                artist: "BeepSmol", 
+                audio: "song.mp3", 
+                image: "placeholder.png", 
+                genre: "N/A",
+                playerUrl: "https://beepsmol.com/music" 
             }
         ];
 
-        // Global state for the player
         let currentAudio = null;
         let currentIdx = null;
 
@@ -272,12 +163,17 @@
             SONGS_DATA.forEach((song, index) => {
                 const card = document.createElement('div');
                 card.id = `card-${index}`;
-                card.className = 'song-card p-5 flex flex-col group';
+                card.className = 'song-card p-5 flex flex-col group relative';
                 
                 card.innerHTML = `
                     <div class="relative mb-4 overflow-hidden rounded-xl">
+                        <!-- EVERY PANEL HAS FULLSCREEN BUTTON -->
+                        <a href="${song.playerUrl}" class="fullscreen-btn" title="Open Full Player">
+                            <i class="fas fa-expand"></i>
+                        </a>
+                        
                         <img src="${song.image}" alt="${song.title}" class="cover-art w-full shadow-lg" onerror="this.src='https://via.placeholder.com/300x300/1e293b/ffffff?text=No+Cover'">
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                              <i class="fas fa-music text-white text-3xl"></i>
                         </div>
                     </div>
@@ -299,63 +195,34 @@
                         </div>
                     </div>
                 `;
-
                 grid.appendChild(card);
             });
         }
 
         function handlePlayClick(index) {
             const song = SONGS_DATA[index];
-
-            // 1. If we click the same song that is currently active
             if (currentIdx === index && currentAudio) {
-                if (currentAudio.paused) {
-                    currentAudio.play();
-                } else {
-                    currentAudio.pause();
-                }
+                if (currentAudio.paused) currentAudio.play();
+                else currentAudio.pause();
                 updateUI(index);
                 return;
             }
-
-            // 2. If a different song was playing, stop it and reset its UI
             if (currentAudio) {
                 currentAudio.pause();
-                currentAudio.src = ""; // Clear source to stop buffering
                 const oldIdx = currentIdx;
                 currentAudio = null;
                 currentIdx = null;
-                updateUI(oldIdx); // Reset old card UI
+                updateUI(oldIdx);
             }
-
-            // 3. Start the new song
             currentIdx = index;
             currentAudio = new Audio(song.audio);
-            
-            currentAudio.play().catch(e => console.error("Playback failed", e));
-            
-            // Track Progress
+            currentAudio.play();
             currentAudio.ontimeupdate = () => {
-                const progressBar = document.getElementById(`progress-${index}`);
-                if (progressBar && currentAudio.duration) {
-                    const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
-                    progressBar.style.width = `${progress}%`;
-                }
+                const pb = document.getElementById(`progress-${index}`);
+                if (pb && currentAudio.duration) pb.style.width = (currentAudio.currentTime / currentAudio.duration) * 100 + '%';
             };
-
-            // Handle End
-            currentAudio.onended = () => {
-                const progressBar = document.getElementById(`progress-${index}`);
-                if (progressBar) progressBar.style.width = '0%';
-                currentAudio = null;
-                currentIdx = null;
-                updateUI(index);
-            };
-
-            // Sync UI states for play/pause events (helps with browser external controls)
             currentAudio.onplay = () => updateUI(index);
             currentAudio.onpause = () => updateUI(index);
-
             updateUI(index);
         }
 
@@ -363,21 +230,13 @@
             const btn = document.getElementById(`btn-${index}`);
             const card = document.getElementById(`card-${index}`);
             if (!btn || !card) return;
-
             const icon = btn.querySelector('i');
-            
-            // If this index is the current active one and audio is playing
             if (currentIdx === index && currentAudio && !currentAudio.paused) {
                 icon.className = 'fas fa-pause';
                 card.classList.add('active', 'playing');
             } else {
                 icon.className = 'fas fa-play ml-1';
                 card.classList.remove('active', 'playing');
-                // If it's not the active song, make sure progress is cleared
-                if (currentIdx !== index) {
-                    const pb = document.getElementById(`progress-${index}`);
-                    if (pb) pb.style.width = '0%';
-                }
             }
         }
 
@@ -385,4 +244,3 @@
     </script>
 </body>
 </html>
-
