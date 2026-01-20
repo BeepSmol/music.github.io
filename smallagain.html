@@ -38,6 +38,7 @@
             padding: 40px;
             text-align: center;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative; /* Added to help position internal elements if needed */
         }
 
         .large-art {
@@ -75,12 +76,12 @@
 
     <div class="bg-blur"></div>
 
-    <a href="https://beepsmol.com/music" class="fixed top-8 left-8 flex items-center gap-2 text-white/70 hover:text-white transition-colors bg-white/10 px-5 py-2 rounded-full backdrop-blur-md">
-        <i class="fas fa-arrow-left"></i>
-        <span>Back to Music</span>
-    </a>
-
     <div class="player-container" id="player">
+        <a href="https://beepsmol.com/music" class="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors bg-white/10 px-4 py-1.5 rounded-full backdrop-blur-md mb-6 text-sm">
+            <i class="fas fa-arrow-left text-xs"></i>
+            <span>Back to Music</span>
+        </a>
+
         <img src="smallagain.png" alt="Small, Again" class="large-art">
         
         <h1 class="text-3xl font-bold mb-1">Small, Again</h1>
